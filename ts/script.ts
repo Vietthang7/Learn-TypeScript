@@ -217,3 +217,219 @@
 // var a: any = 10;
 // a = "10";
 // a = true;
+
+// Bài 37
+
+// 01. Kiểu Void
+// const hello = (fullName: string): string => {
+//   return `Xin chào ${fullName}`;
+// }
+
+// console.log(hello("Le Van A"));
+
+
+// const hello = (fullName: string): void => {
+//   console.log(`Xin chào ${fullName}`);
+// }
+
+// hello("Le Van A");
+
+
+
+// 02. Union type
+// interface Product {
+//   id: string,
+//   title: string,
+//   price: string,
+//   rating: number | string,
+//   status: "initial" | "active" | "inactive"
+// }
+
+// interface Account {
+//   id: string,
+//   fullName: string,
+//   phone: string,
+//   status: "initial" | "active" | "inactive"
+// }
+
+
+
+// 03. Type alias
+// type RatingType = number | string;
+// type StatusType = "initial" | "active" | "inactive";
+
+// interface Product {
+//   id: string,
+//   title: string,
+//   price: string,
+//   rating: RatingType,
+//   status: StatusType
+// }
+
+// interface Account {
+//   id: string,
+//   fullName: string,
+//   phone: string,
+//   status: StatusType
+// }
+
+
+
+// 04. Intersection type (Hợp nhiều Interface thành 1)
+// interface Account {
+//   id: string,
+//   fullName: string,
+//   age: number
+// }
+
+// interface Contact {
+//   email: string,
+//   phone: string,
+//   address: string
+// }
+
+// interface Social {
+//   facebook?: string,
+//   zalo?: string,
+//   tiktok?: string
+// }
+
+// type AccountContact = Account & Contact;
+// type AccountSocial = Account & Social;
+// type AccountFull = Account & Contact & Social;
+
+
+
+// 05. Declaration merging (Hợp 2 Interface trùng tên thành 1)
+// interface User {
+//   id: string,
+//   fullName: string
+// }
+
+// interface User {
+//   email: string,
+//   phone: string
+// }
+
+// const userA: User = {
+//   id: "123",
+//   fullName: "Le Van A",
+//   email: "levana@gmail.com",
+//   phone: "0123456789"
+// };
+
+
+
+
+// 6.1. Partial<Type>
+// Thay đổi tất cả các thuộc tính trong một interface thành tùy chọn (optional)
+// interface User {
+//   fullName: string,
+//   email: string,
+//   password: string
+// }
+
+// const createUserA: User = {
+//   fullName: "Le Van A",
+//   email: "levana@gmail.com",
+//   password: "123456"
+// }
+
+// const updateUserB: Partial<User> = {
+//   fullName: "Le Van A"
+// }
+
+
+
+// 6.2. Required<Type>
+// Thay đổi tất cả các thuộc tính trong một đối tượng thành bắt buộc
+// interface Product {
+//   title: string,
+//   price?: number,
+//   desc?: string
+// }
+
+// const createProduct1: Product = {
+//   title: "Sản phẩm 1"
+// };
+
+// const updateProduct2: Required<Product> = {
+//   title: "Sản phẩm 2",
+//   price: 120000,
+//   desc: "Mô tả sản phẩm 2"
+// };
+
+
+
+// 6.3. Omit<Type, Keys>
+// Xóa một hoặc nhiều thuộc tính ra khỏi đối tượng.
+// interface User {
+//   fullName: string,
+//   email: string,
+//   cccd: string,
+//   password: string,
+//   phone?: string
+// }
+
+// const createUserA: User = {
+//   fullName: "Le Van A",
+//   email: "levana@gmail.com",
+//   cccd: "123456789",
+//   password: "123456"
+// };
+
+// const updateUserB: Omit<User, "fullName" | "cccd"> = {
+//   email: "levana@gmail.com",
+//   password: "123456"
+// };
+
+
+
+
+// 6.4. Pick<Type, Keys>
+// Xóa tất cả các thuộc tính ra khỏi đối tượng, ngoài trừ các thuộc tính muốn giữ lại.
+// interface User {
+//   fullName: string,
+//   email: string,
+//   cccd: string,
+//   password: string,
+//   phone?: string
+// }
+
+// const createUserA: User = {
+//   fullName: "Le Van A",
+//   email: "levana@gmail.com",
+//   cccd: "123456789",
+//   password: "123456"
+// };
+
+// const updateUserB: Pick<User, "email" | "password"> = {
+//   email: "levana@gmail.com",
+//   password: "123456"
+// };
+
+
+
+// 6.5. Readonly<Type>
+// Tất cả các thuộc tính trong đối tượng đổi thành trạng thái chỉ đọc, không sửa được.
+// interface Product {
+//   title: string,
+//   price?: number,
+//   desc?: string
+// }
+
+// const createProduct1: Product = {
+//   title: "Sản phẩm 1",
+//   price: 120000,
+//   desc: "Mô tả sản phẩm 1"
+// };
+
+// createProduct1.price = 200000;
+
+// const createProduct2: Readonly<Product> = {
+//   title: "Sản phẩm 2",
+//   price: 120000,
+//   desc: "Mô tả sản phẩm 2"
+// };
+
+// createProduct2.price = 150000; // Lỗi
